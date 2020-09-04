@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var wrongAnswers = 0
+    var wrongAnswers = 7
     var usedLetters = [String]()
     var scoreLabel: UILabel!
     var currentAnswers: UITextField!
@@ -122,8 +122,8 @@ class ViewController: UIViewController {
                     promptWord += "?"
                 }
             }
-            //let promptWordLow = promptWord.uppercased()
-            if word.text == promptWord {
+            let promptWordUP = promptWord.uppercased()
+            if word.text == promptWordUP {
                 wrongWord()
             }
             word.text = promptWord.uppercased()
@@ -145,13 +145,34 @@ class ViewController: UIViewController {
     }
     
     func wrongWord() {
-        wrongAnswers += 1
+        wrongAnswers -= 1
+        if wrongAnswers == 0 {
+            let ac = UIAlertController(title: "No more attempts left :( ", message: "Click Retry to start over", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Retry", style: .default, handler: retryLevel))
+            present(ac, animated: true)
+        }
         let wordsLetters = usedLetters.joined(separator: ", ")
         usedWords.text = wordsLetters.uppercased()
         currentAnswers.text = ""
-        let ac = UIAlertController(title: "Wrong!", message: "Try another word or letter", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Wrong!", message: "Attempts left: \(wrongAnswers)", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Ok", style: .default))
         present(ac, animated: true)
+    }
+    
+    func retryLevel(action: UIAlertAction) {
+        currentAnswers.text = ""
+        word.text = ""
+        usedWords.text = ""
+        wrongAnswers = 7
+        level = 0
+        score = 0
+        usedLetters.removeAll(keepingCapacity: true)
+        words.shuffle()
+
+        answer = words[level].lowercased()
+        for _ in answer {
+            word.text?.append("?")
+        }
     }
     
     func levelComplite() {
@@ -170,7 +191,7 @@ class ViewController: UIViewController {
     func levelUP(action: UIAlertAction) {
         level += 1
         score += 1
-        wrongAnswers = 0
+        wrongAnswers = 7
         usedWords.text = ""
         usedLetters.removeAll(keepingCapacity: true)
         if level >= words.count {
