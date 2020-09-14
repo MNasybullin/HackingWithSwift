@@ -10,7 +10,13 @@ import UIKit
 
 class ViewController: UITableViewController {
     var allWords = [String]()
-    var usedWords = [String]()
+    var usedWords = [String]() {
+        didSet {
+            saveWords.usedWords = usedWords.self
+            save()
+        }
+    }
+    var saveWords: saveGame!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +35,45 @@ class ViewController: UITableViewController {
         if allWords.isEmpty {
             allWords = ["silkworm"]
         }
+        saveWords = saveGame(word: "", usedWords: usedWords)
+        let defaults = UserDefaults.standard
         
-        startGame()
+        if let savedPeople = defaults.object(forKey: "game") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                saveWords = try jsonDecoder.decode(saveGame.self, from: savedPeople)
+            } catch {
+                print("Failed to load game.")
+            }
+        }
+        if saveWords.word.isEmpty {
+            startGame()
+        } else {
+            title = saveWords.word
+            usedWords = saveWords.usedWords
+            tableView.reloadData()
+            saveWords.word.removeAll()
+            saveWords.usedWords.removeAll(keepingCapacity: true)
+        }
+    }
+    
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(saveWords) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "game")
+        } else {
+            print("Failed to save game.")
+        }
     }
     
     @objc func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
+        saveWords.word = title!
+        saveWords.usedWords = usedWords
+        save()
         tableView.reloadData()
     }
     
