@@ -16,11 +16,24 @@ class ViewController: UIViewController {
     var countries = [String]()
     var correctAnswer = 0
     var score = 0
+    var scoreMax = 0
     var numberOfQuestions = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let defaults = UserDefaults.standard
+        
+        if let savedScore = defaults.object(forKey: "score") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                scoreMax = try jsonDecoder.decode(Int.self, from: savedScore)
+            } catch {
+                print("Failed to load score.")
+            }
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(scoreInfo))
         
@@ -35,6 +48,17 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
         askQuestion()
+    }
+    
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(scoreMax) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "score")
+        } else {
+            print("Failed to save score.")
+        }
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
@@ -56,6 +80,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
+        var message: String
         
         if sender.tag == correctAnswer {
             title = "Correct"
@@ -68,8 +93,14 @@ class ViewController: UIViewController {
         if numberOfQuestions == 10 {
             title += ". You have answered 10 questions!"
         }
-        
-        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
+        if score > scoreMax {
+            scoreMax = score
+            save()
+            message = "You have broken your last record!"
+        } else {
+            message = "Your score is \(score)."
+        }
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         present(ac, animated: true)
         
