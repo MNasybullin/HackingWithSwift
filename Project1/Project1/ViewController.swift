@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UITableViewController {
     var pictures = [String]()
+    var numberOfImpressions = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,30 @@ class ViewController: UITableViewController {
         
         // Do any additional setup after loading the view.
         performSelector(inBackground: #selector(loadNSSL), with: nil)
+        
+        let defaults = UserDefaults.standard
+        
+        if let savedNumber = defaults.object(forKey: "number") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                numberOfImpressions = try jsonDecoder.decode([Int].self, from: savedNumber)
+            } catch {
+                print("Failed to load numbers.")
+            }
+        }
+        
+        
+    }
+    
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        if let savedData = try? jsonEncoder.encode(numberOfImpressions) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "number")
+        } else {
+            print("Failed to save number.")
+        }
     }
     
     @objc func loadNSSL() {
@@ -32,9 +57,10 @@ class ViewController: UITableViewController {
         for item in items {
             if item.hasPrefix("nssl") {
                 pictures.append(item)
+                numberOfImpressions.append(0)
             }
         }
-        pictures = pictures.sorted(by: <)
+        //pictures = pictures.sorted(by: <)
         print(pictures)
     }
     
@@ -53,6 +79,8 @@ class ViewController: UITableViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             // 2: success! Set its selectedImage property
             vc.selectedImage = pictures[indexPath.row]
+            numberOfImpressions[indexPath.row] += 1
+            save()
             // 2.1: Rather than show image names in the detail title bar, show “Picture X of Y”, where Y is the total number of images and X is the selected picture’s position in the array. Make sure you count from 1 rather than 0.
             vc.imageTitleString = "Picture \(indexPath.row + 1) of \(pictures.count)"
             // 3: now push it onto the navigation controller
