@@ -99,6 +99,15 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
             let pathImage = getDocumentDirectory().appendingPathComponent(picture.image)
             vc.selectedImage = UIImage(contentsOfFile: pathImage.path)
             
+            let imageIndex = indexPath.row
+            let deletePicture = {
+                self.pictures.remove(at: imageIndex)
+                self.tableView.reloadData()
+                self.save()
+            }
+            
+            vc.deletePicture = deletePicture
+            
             navigationController?.pushViewController(vc, animated: true)
         }
     }
