@@ -62,6 +62,13 @@ class ViewController: UIViewController {
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+            self.button1.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.button2.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.button3.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+        
         countries.shuffle()
         
         button1.setImage(UIImage(named: countries[0]), for: .normal)
@@ -82,6 +89,9 @@ class ViewController: UIViewController {
         var title: String
         var message: String
         
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        })
         if sender.tag == correctAnswer {
             title = "Correct"
             score += 1

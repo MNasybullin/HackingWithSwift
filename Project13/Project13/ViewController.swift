@@ -44,10 +44,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func importPicture() {
-        let picker = UIImagePickerController()
-        picker.allowsEditing = true
-        picker.delegate = self
-        present(picker, animated: true)
+        UIView.animate(withDuration: 0.5, delay: 0, options: [],
+                       animations: {
+                        self.imageView.alpha = 0
+        }) { finished in
+            let picker = UIImagePickerController()
+            picker.allowsEditing = true
+            picker.delegate = self
+            self.present(picker, animated: true) {
+                self.imageView.alpha = 1
+            }
+        }
     }
     
     @IBAction func changeFilter(_ sender: Any) {
@@ -114,6 +121,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
             let processedImage = UIImage(cgImage: cgimg)
+
             self.imageView.image = processedImage
         }
         
