@@ -1,0 +1,25 @@
+{
+  "countries": [
+    {
+      "country": "Russia",
+      "capital": "Moscow",
+      "language": "Russian",
+      "population": "146,748,590",
+      "currency": "Russian ruble"
+    },
+    {
+      "country": "United States of America",
+      "capital": "Washington",
+      "language": "English",
+      "population": "328,239,523",
+      "currency": "United States dollar"
+    },
+    {
+      "country": "Japan",
+      "capital": "Tokio",
+      "language": "Japanese",
+      "population": "125,960,000",
+      "currency": "Japanese yen"
+    }
+  ]
+}
