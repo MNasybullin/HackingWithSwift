@@ -16,11 +16,8 @@
 		2CBA43FA252756C6003FE1D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA43F9252756C6003FE1D1 /* Assets.xcassets */; };
 		2CBA43FD252756C6003FE1D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA43FB252756C6003FE1D1 /* LaunchScreen.storyboard */; };
 		2CBA442F25275B6E003FE1D1 /* curtains@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440825275B6E003FE1D1 /* curtains@2x.png */; };
-		2CBA443025275B6E003FE1D1 /* empty.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440925275B6E003FE1D1 /* empty.wav */; };
 		2CBA443225275B6E003FE1D1 /* game-over@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440B25275B6E003FE1D1 /* game-over@2x.png */; };
 		2CBA443425275B6E003FE1D1 /* grass-trees@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440D25275B6E003FE1D1 /* grass-trees@2x.png */; };
-		2CBA443525275B6E003FE1D1 /* reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440E25275B6E003FE1D1 /* reload.wav */; };
-		2CBA443625275B6E003FE1D1 /* shot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA440F25275B6E003FE1D1 /* shot.wav */; };
 		2CBA443825275B6E003FE1D1 /* shots0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA441125275B6E003FE1D1 /* shots0@2x.png */; };
 		2CBA443A25275B6E003FE1D1 /* shots1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA441325275B6E003FE1D1 /* shots1@2x.png */; };
 		2CBA443C25275B6E003FE1D1 /* shots2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA441525275B6E003FE1D1 /* shots2@2x.png */; };
@@ -35,6 +32,11 @@
 		2CBA444E25275B6E003FE1D1 /* water-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA442725275B6E003FE1D1 /* water-bg@2x.png */; };
 		2CBA445025275B6E003FE1D1 /* water-fg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA442925275B6E003FE1D1 /* water-fg@2x.png */; };
 		2CBA445225275B6E003FE1D1 /* wood-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CBA442B25275B6E003FE1D1 /* wood-background@2x.png */; };
+		2CDAE81D252B73FE008F7F0B /* empty.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2CDAE81A252B73FE008F7F0B /* empty.mp3 */; };
+		2CDAE81E252B73FE008F7F0B /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2CDAE81B252B73FE008F7F0B /* shot.mp3 */; };
+		2CDAE81F252B73FE008F7F0B /* reload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2CDAE81C252B73FE008F7F0B /* reload.mp3 */; };
+		2CDAE822252B7A4E008F7F0B /* gameOver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDAE820252B7A4E008F7F0B /* gameOver@2x.png */; };
+		2CDAE823252B7A4E008F7F0B /* gameOverSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2CDAE821252B7A4E008F7F0B /* gameOverSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,11 +51,8 @@
 		2CBA43FC252756C6003FE1D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CBA43FE252756C6003FE1D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CBA440825275B6E003FE1D1 /* curtains@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "curtains@2x.png"; sourceTree = "<group>"; };
-		2CBA440925275B6E003FE1D1 /* empty.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = empty.wav; sourceTree = "<group>"; };
 		2CBA440B25275B6E003FE1D1 /* game-over@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-over@2x.png"; sourceTree = "<group>"; };
 		2CBA440D25275B6E003FE1D1 /* grass-trees@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grass-trees@2x.png"; sourceTree = "<group>"; };
-		2CBA440E25275B6E003FE1D1 /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
-		2CBA440F25275B6E003FE1D1 /* shot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shot.wav; sourceTree = "<group>"; };
 		2CBA441125275B6E003FE1D1 /* shots0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shots0@2x.png"; sourceTree = "<group>"; };
 		2CBA441325275B6E003FE1D1 /* shots1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shots1@2x.png"; sourceTree = "<group>"; };
 		2CBA441525275B6E003FE1D1 /* shots2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shots2@2x.png"; sourceTree = "<group>"; };
@@ -68,6 +67,11 @@
 		2CBA442725275B6E003FE1D1 /* water-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "water-bg@2x.png"; sourceTree = "<group>"; };
 		2CBA442925275B6E003FE1D1 /* water-fg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "water-fg@2x.png"; sourceTree = "<group>"; };
 		2CBA442B25275B6E003FE1D1 /* wood-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood-background@2x.png"; sourceTree = "<group>"; };
+		2CDAE81A252B73FE008F7F0B /* empty.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = empty.mp3; sourceTree = "<group>"; };
+		2CDAE81B252B73FE008F7F0B /* shot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shot.mp3; sourceTree = "<group>"; };
+		2CDAE81C252B73FE008F7F0B /* reload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = reload.mp3; sourceTree = "<group>"; };
+		2CDAE820252B7A4E008F7F0B /* gameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameOver@2x.png"; sourceTree = "<group>"; };
+		2CDAE821252B7A4E008F7F0B /* gameOverSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOverSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +122,13 @@
 			isa = PBXGroup;
 			children = (
 				2CBA440825275B6E003FE1D1 /* curtains@2x.png */,
-				2CBA440925275B6E003FE1D1 /* empty.wav */,
+				2CDAE81A252B73FE008F7F0B /* empty.mp3 */,
+				2CDAE81C252B73FE008F7F0B /* reload.mp3 */,
+				2CDAE81B252B73FE008F7F0B /* shot.mp3 */,
+				2CDAE820252B7A4E008F7F0B /* gameOver@2x.png */,
+				2CDAE821252B7A4E008F7F0B /* gameOverSound.mp3 */,
 				2CBA440B25275B6E003FE1D1 /* game-over@2x.png */,
 				2CBA440D25275B6E003FE1D1 /* grass-trees@2x.png */,
-				2CBA440E25275B6E003FE1D1 /* reload.wav */,
-				2CBA440F25275B6E003FE1D1 /* shot.wav */,
 				2CBA441125275B6E003FE1D1 /* shots0@2x.png */,
 				2CBA441325275B6E003FE1D1 /* shots1@2x.png */,
 				2CBA441525275B6E003FE1D1 /* shots2@2x.png */,
@@ -203,9 +209,13 @@
 				2CBA444225275B6E003FE1D1 /* stick1@2x.png in Resources */,
 				2CBA444625275B6E003FE1D1 /* target0@2x.png in Resources */,
 				2CBA444825275B6E003FE1D1 /* target1@2x.png in Resources */,
-				2CBA443625275B6E003FE1D1 /* shot.wav in Resources */,
+				2CDAE823252B7A4E008F7F0B /* gameOverSound.mp3 in Resources */,
+				2CDAE822252B7A4E008F7F0B /* gameOver@2x.png in Resources */,
 				2CBA43F8252756C4003FE1D1 /* Main.storyboard in Resources */,
+				2CDAE81E252B73FE008F7F0B /* shot.mp3 in Resources */,
 				2CBA443C25275B6E003FE1D1 /* shots2@2x.png in Resources */,
+				2CDAE81F252B73FE008F7F0B /* reload.mp3 in Resources */,
+				2CDAE81D252B73FE008F7F0B /* empty.mp3 in Resources */,
 				2CBA444425275B6E003FE1D1 /* stick2@2x.png in Resources */,
 				2CBA444E25275B6E003FE1D1 /* water-bg@2x.png in Resources */,
 				2CBA442F25275B6E003FE1D1 /* curtains@2x.png in Resources */,
@@ -216,13 +226,11 @@
 				2CBA43FA252756C6003FE1D1 /* Assets.xcassets in Resources */,
 				2CBA43FD252756C6003FE1D1 /* LaunchScreen.storyboard in Resources */,
 				2CBA445025275B6E003FE1D1 /* water-fg@2x.png in Resources */,
-				2CBA443025275B6E003FE1D1 /* empty.wav in Resources */,
 				2CBA443A25275B6E003FE1D1 /* shots1@2x.png in Resources */,
 				2CBA445225275B6E003FE1D1 /* wood-background@2x.png in Resources */,
 				2CBA444025275B6E003FE1D1 /* stick0@2x.png in Resources */,
 				2CBA443425275B6E003FE1D1 /* grass-trees@2x.png in Resources */,
 				2CBA443E25275B6E003FE1D1 /* shots3@2x.png in Resources */,
-				2CBA443525275B6E003FE1D1 /* reload.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

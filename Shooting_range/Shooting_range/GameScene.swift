@@ -18,13 +18,112 @@ class GameScene: SKScene {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var gameTimer: Timer?
+    var gameCount = 30 {
+        didSet {
+            if gameCount == 0 {
+                gameTimer?.invalidate()
+                isGameOver = true
+                gameOver()
+            }
+        }
+    }
+    var shots: SKSpriteNode!
+    var ammunition = 3 {
+        didSet {
+            let imageName: String!
+            switch ammunition {
+            case 1:
+                imageName = "shots1"
+            case 2:
+                imageName = "shots2"
+            case 3:
+                imageName = "shots3"
+            default:
+                imageName = "shots0"
+            }
+            shots.removeFromParent()
+            shots = SKSpriteNode(imageNamed: imageName)
+            shots.name = "shots"
+            shots.position = CGPoint(x:170, y: 30)
+            shots.zPosition = 11
+            addChild(shots)
+        }
+    }
     
     override func didMove(to view: SKView) {
         
         createBackground()
         createWater()
         createHUD()
-       
+        gameTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(gameLoop), userInfo: nil, repeats: true)
+    }
+    
+    @objc func gameLoop() {
+        gameCount -= 1
+        let count = Int.random(in: 1...4)
+        var i = 0
+        while i < count {
+            startGame()
+            i += 1
+        }
+    }
+    
+    func gameOver() {
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 400, y: 300)
+        gameOver.zPosition = 100
+        
+        let finalScore = SKLabelNode(fontNamed: "Chalkduster")
+        finalScore.text = "Final score: \(score)"
+        finalScore.position = CGPoint(x: 400, y: 150)
+        finalScore.zPosition = 100
+        finalScore.fontSize = 48
+        
+        addChild(gameOver)
+        addChild(finalScore)
+        
+        run(SKAction.playSoundFileNamed("gameOverSound.mp3", waitForCompletion: false))
+    }
+    
+    func startGame() {
+        if isGameOver == true { return }
+        
+        let target = Target()
+        target.create()
+        let levelLine = Int.random(in: 0...2)
+        switch levelLine {
+        case 0:
+            target.movingRight = true
+            target.position.x = 0
+            target.position.y = 220
+            target.zPosition = 1
+        case 1:
+            target.position.x = 800
+            target.position.y = 140
+            target.zPosition = 3
+        default:
+            target.movingRight = true
+            target.position.x = 0
+            target.position.y = 70
+            target.zPosition = 5
+        }
+        let duration = Double.random(in: 4...8)
+        if target.movingRight == true {
+            target.run(SKAction.moveBy(x: 1000, y: 0, duration: duration))
+        } else {
+            target.xScale = -target.xScale
+            target.run(SKAction.moveBy(x: -1000, y: 0, duration: duration))
+        }
+        addChild(target)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        for node in children {
+            if node.position.x < 0 || node.position.x > 800 {
+                node.removeFromParent()
+            }
+        }
     }
     
     func createBackground() {
@@ -70,7 +169,8 @@ class GameScene: SKScene {
         curtains.zPosition = 10
         addChild(curtains)
         
-        let shots = SKSpriteNode(imageNamed: "shots3")
+        shots = SKSpriteNode(imageNamed: "shots3")
+        shots.name = "shots"
         shots.position = CGPoint(x:170, y: 30)
         shots.zPosition = 11
         addChild(shots)
@@ -85,5 +185,27 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let tappedNodes = nodes(at: location)
+        ammunition -= 1
+        for node in tappedNodes {
+            if node.name == "shots" {
+                ammunition = 3
+                run(SKAction.playSoundFileNamed("reload.mp3", waitForCompletion: false))
+                return
+            }
+            if node.name == "target" && ammunition >= 0 {
+                let target = node.parent as! Target
+                target.hit()
+                score += 5
+            }
+        }
+        if ammunition >= 0 {
+            run(SKAction.playSoundFileNamed("shot.mp3", waitForCompletion: false))
+        } else {
+            run(SKAction.playSoundFileNamed("empty.mp3", waitForCompletion: false))
+        }
     }
+    
 }
