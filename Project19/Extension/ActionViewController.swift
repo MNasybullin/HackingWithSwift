@@ -20,7 +20,9 @@ class ActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let buttonDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let buttonBookmarks = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(bookmarks))
+        navigationItem.setRightBarButtonItems([buttonDone, buttonBookmarks], animated: true)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -41,7 +43,19 @@ class ActionViewController: UIViewController {
             }
         }
     }
-
+    
+    @objc func bookmarks() {
+        let ac = UIAlertController(title: "Scripts:", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "alert(document.title);", style: .default, handler: scripts))
+        ac.addAction(UIAlertAction(title: "cancel", style: .cancel))
+        present(ac, animated: true)
+    }
+    
+    func scripts(action: UIAlertAction) {
+        script.text = action.title
+        done()
+    }
+    
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
