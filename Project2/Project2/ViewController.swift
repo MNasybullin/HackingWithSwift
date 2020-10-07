@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import UserNotifications
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
@@ -21,8 +22,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        registerLocalNotification()
+        scheduleLocal()
         let defaults = UserDefaults.standard
         
         if let savedScore = defaults.object(forKey: "score") as? Data {
@@ -46,8 +47,72 @@ class ViewController: UIViewController {
         button1.layer.borderColor = UIColor.lightGray.cgColor
         button2.layer.borderColor = UIColor.lightGray.cgColor
         button3.layer.borderColor = UIColor.lightGray.cgColor
-        
         askQuestion()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // pull out the buried userInfo dictionary
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let customData = userInfo["customData"] as? String {
+            print("Custom data received: \(customData)")
+
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                print("Default identifier")
+
+            case "open":
+                scheduleLocal()
+                print("Show more information…")
+
+            default:
+                break
+            }
+        }
+
+        // you must call the completion handler when you're done
+        completionHandler()
+    }
+    
+    @objc func registerLocalNotification() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yay!")
+            } else {
+                print("D'oh")
+            }
+        }
+
+    }
+    
+    func registerCategories() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+
+        let show = UNNotificationAction(identifier: "open", title: "Open game", options: .foreground)
+
+        let category = UNNotificationCategory(identifier: "remind", actions: [show], intentIdentifiers: [])
+
+        center.setNotificationCategories([category])
+    }
+    
+    func scheduleLocal() {
+        registerCategories()
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        let content = UNMutableNotificationContent()
+        content.title = "Hey"
+        content.body = "We are waiting for you in the game!"
+        content.categoryIdentifier = "remind"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
     }
     
     func save() {
@@ -117,7 +182,7 @@ class ViewController: UIViewController {
     }
     
     @objc func scoreInfo() {
-        let ac = UIAlertController(title: "Your score: \(score).", message: "", preferredStyle: .alert)
+        let ac = UIAlertController(title: "Your score: \(score).", message: "Top score: \(scoreMax).", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Ok", style: .default))
         present(ac, animated: true)
     }
