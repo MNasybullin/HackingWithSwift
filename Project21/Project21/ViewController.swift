@@ -9,11 +9,13 @@
 import UIKit
 import UserNotifications
 
+var timeInterval: Double!
+
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        timeInterval = 5
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
     }
@@ -21,22 +23,31 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // pull out the buried userInfo dictionary
         let userInfo = response.notification.request.content.userInfo
-
+        var message: String!
+        
         if let customData = userInfo["customData"] as? String {
             print("Custom data received: \(customData)")
 
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
-                // the user swiped to unlock
+                message = "Default identifier"
                 print("Default identifier")
 
             case "show":
-                // the user tapped our "show more info…" button
+                message = "Show more information…"
                 print("Show more information…")
+            case "remind":
+                message = "Reminder will be in 24 hours"
+                print("Reminder will be in 24 hours")
+                timeInterval = 86400
+                scheduleLocal()
 
             default:
                 break
             }
+            let ac = UIAlertController(title: "Notification", message: message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
         }
 
         // you must call the completion handler when you're done
@@ -48,7 +59,8 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         center.delegate = self
 
         let show = UNNotificationAction(identifier: "show", title: "Tell me more…", options: .foreground)
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
+        let remind = UNNotificationAction(identifier: "remind", title: "Remind me later", options: .foreground)
+        let category = UNNotificationCategory(identifier: "alarm", actions: [show, remind], intentIdentifiers: [])
 
         center.setNotificationCategories([category])
     }
@@ -83,7 +95,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         dateComponents.minute = 30
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
          */
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
