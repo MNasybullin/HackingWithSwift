@@ -31,6 +31,7 @@
 		2CAC3DCA2531EF8E006BB152 /* swoosh3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAC3DB92531EF8D006BB152 /* swoosh3.caf */; };
 		2CAC3DCB2531EF8E006BB152 /* whack.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAC3DBA2531EF8D006BB152 /* whack.caf */; };
 		2CAC3DCC2531EF8E006BB152 /* wrong.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAC3DBB2531EF8D006BB152 /* wrong.caf */; };
+		2CC4441525349B0400F023FF /* gameOver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CC4441425349B0400F023FF /* gameOver@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		2CAC3DB92531EF8D006BB152 /* swoosh3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = swoosh3.caf; sourceTree = "<group>"; };
 		2CAC3DBA2531EF8D006BB152 /* whack.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whack.caf; sourceTree = "<group>"; };
 		2CAC3DBB2531EF8D006BB152 /* wrong.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = wrong.caf; sourceTree = "<group>"; };
+		2CC4441425349B0400F023FF /* gameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameOver@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				2CAC3DB92531EF8D006BB152 /* swoosh3.caf */,
 				2CAC3DBA2531EF8D006BB152 /* whack.caf */,
 				2CAC3DBB2531EF8D006BB152 /* wrong.caf */,
+				2CC4441425349B0400F023FF /* gameOver@2x.png */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC4441525349B0400F023FF /* gameOver@2x.png in Resources */,
 				2CAC3DC32531EF8E006BB152 /* sliceHitBomb.sks in Resources */,
 				2CAC3DC12531EF8E006BB152 /* sliceBombFuse.caf in Resources */,
 				2CAC3D9E2531EEF2006BB152 /* Main.storyboard in Resources */,
