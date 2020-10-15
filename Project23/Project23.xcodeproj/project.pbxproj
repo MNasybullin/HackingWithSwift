@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C2447ED253774BA002B51B5 /* Project23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Project23.entitlements; sourceTree = "<group>"; };
 		2CAC3D8F2531EEF2006BB152 /* Project23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CAC3D922531EEF2006BB152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CAC3D942531EEF2006BB152 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		2CAC3D912531EEF2006BB152 /* Project23 */ = {
 			isa = PBXGroup;
 			children = (
+				2C2447ED253774BA002B51B5 /* Project23.entitlements */,
 				2CAC3D922531EEF2006BB152 /* AppDelegate.swift */,
 				2CAC3D942531EEF2006BB152 /* GameScene.sks */,
 				2CAC3D982531EEF2006BB152 /* GameScene.swift */,
@@ -368,6 +370,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Project23/Project23.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -385,6 +388,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Project23/Project23.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
